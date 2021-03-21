@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Category</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/city.css" th:href="@{/css/city.css}">
+</head>
+
+<div>
+        <button  class="btn btn-primary" data-toggle="modal" data-target="#modal-add" th:text="create ">+   Добавить Город</button>
+</div>
+
+<table>
+    <tr>
+    <tr th:each="city,iter:${listDto}">
+        <td th:text="${iter.count}"></td>
+        <td th:text="${city.name}"></td>
+        <td>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-update"
+                    th:attr="data-id=''+${city.id}+'',data-name=''+${city.name}+'',
+                    data-description=''+${city.description}+''">Update</button>
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-delete"
+                    th:attr="data-url=@{/city/delete/{id}(id=${city.id})},data-name=''+${city.name}+'',
+                    data-description=''+${city.description}+''" >Delete</button>
+</table>
+
+<!-- Modal  Add City-->
+<div class="modal fade" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Add New City</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+            </div>
+            <form  th:action="@{/city/create}"  th:object="${cityDto}" th:method="post" >
+                 <div>Enter name </div>
+                <input  class="form-control" th:field="*{name}" type="text" required >
+                <div>Enter description</div>
+                <input  class="form-control" th:field="*{description}" type="text" required>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" >Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal  Update City-->
+<div class="modal fade" id="modal-update" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="#" th:action="@{/city/update}"  th:object="${cityDto}" th:method="post"  enctype="multipart/form-data" >
+                <div class="modal-body">
+                    <a id="idTextUpdate" th:text="text" ></a>
+                    <input  id="idModalUpdate" th:field="*{id}" type="hidden" >
+                    <div>Enter new city name </div>
+                    <input   class="form-control" th:field="*{name}" type="text" required>
+                    <div>Enter new city description </div>
+                    <input   class="form-control" th:field="*{description}" type="text" required >
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" >Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal  Delete City-->
+
+<div   class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <p id="modal-id"></p>
+            <div class="modal-header">
+                <h5 class="modal-title" >Delete City</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <a id="idTextDelete" th:text="text" ></a>
+            </div>
+            <div class="modal-footer">
+                <a id="idModalDelete" th:href="@{/city/delete/{id}(id=${cityDto.id})}" >
+                    <button  id="idButtonDelete" class="btn btn-primary"  data-toggle="modal" type= "submit" value="delete" >Delete</button></a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+<!-- Custom JS -->
+<script src="../static/js/city.js" th:src="@{/js/city.js}"></script>
+</body>
+</html>

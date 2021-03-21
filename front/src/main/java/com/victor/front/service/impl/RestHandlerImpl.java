@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 
 import org.springframework.http.*;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestOperations;
 
-
-
+@Service
 public class RestHandlerImpl implements RestHandler {
 
     private static final Logger LOG = LoggerFactory.getLogger(RestHandlerImpl.class);
@@ -18,7 +18,7 @@ public class RestHandlerImpl implements RestHandler {
 
     private final String backendApiVersion = "/v1.0";
 
-    final RestOperations rest;
+     final RestOperations rest;
 
     public RestHandlerImpl(RestOperations rest) {
         this.rest = rest;
@@ -53,7 +53,7 @@ public class RestHandlerImpl implements RestHandler {
         HttpHeaders requestHeader = createRequestHeaders();
         HttpEntity<T> requestEntity = new HttpEntity<>(responseBody,requestHeader);
 
-        ResponseEntity<S> response = rest.postForEntity(requestUrl,requestEntity,responseBodyClz);
+        ResponseEntity<S> response = rest.exchange(requestUrl,HttpMethod.POST,requestEntity,responseBodyClz);
         LOG.debug("In doGet - POST request to URL:[{}] was successful", requestUrl);
         return response;
     }
@@ -64,7 +64,7 @@ public class RestHandlerImpl implements RestHandler {
         HttpHeaders requestHeader = createRequestHeaders();
         HttpEntity<T> requestEntity = new HttpEntity<>(responseBody,requestHeader);
 
-        ResponseEntity<S> response = rest.postForEntity(requestUrl,requestEntity,responseBodyClz);
+        ResponseEntity<S> response = rest.exchange(requestUrl,HttpMethod.PUT,requestEntity,responseBodyClz);
         LOG.debug("In doGet - PUT request to URL:[{}] was successful", requestUrl);
         return response;
     }

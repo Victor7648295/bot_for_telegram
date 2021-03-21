@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.victor.back")
 public class BackApplication {
 
     public static void main(String[] args) {

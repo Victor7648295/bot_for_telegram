@@ -1,14 +1,15 @@
 package com.victor.front.service;
 
-import com.victor.model.dto.CityDto;
+import com.victor.back.model.dto.CityDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RestServiceCity {
 
-    CityDto createCityDto(String name , String description);
+    Optional<CityDto> createCityDto(CityDto cityDto);
 
-    CityDto updateCityDto(String name , String description);
+    Optional<CityDto> updateCityDto(CityDto cityDto);
 
     List<CityDto> getAllCityDto();
 

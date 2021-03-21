@@ -6,7 +6,7 @@ public class Constants {
 
         public static final String CREATE_CITY = "/create";
 
-        public static final String DELETE_CITY = "/delete/%d";
+        public static final String DELETE_CITY = "/delete/";
 
         public static final String UPDATE_CITY = "/update";
 

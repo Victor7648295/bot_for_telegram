@@ -4,7 +4,7 @@ import com.victor.front.config.Constants;
 import com.victor.front.exception.RestCommunicationException;
 import com.victor.front.service.RestHandler;
 import com.victor.front.service.RestServiceCity;
-import com.victor.model.dto.CityDto;
+import com.victor.back.model.dto.CityDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RestServiceImpl implements RestServiceCity {
@@ -28,23 +29,21 @@ public class RestServiceImpl implements RestServiceCity {
 
 
     @Override
-    public CityDto createCityDto(String name, String description) {
-        CityDto cityDto = new CityDto(name,description);
+    public Optional<CityDto> createCityDto(CityDto cityDto) {
         ResponseEntity<CityDto> responseEntity  = rest.doPost(Constants.Endpoints.CREATE_CITY,
                 cityDto,
                 CityDto.class);
         LOG.debug("In RestCityService - Sending POST request to add new City");
-        return responseEntity.getBody();
+        return Optional.ofNullable(responseEntity.getBody());
     }
 
     @Override
-    public CityDto updateCityDto(String name, String description) {
-        CityDto cityDto = new CityDto(name,description);
+    public Optional<CityDto> updateCityDto(CityDto cityDto) {
         ResponseEntity<CityDto> responseEntity  = rest.doPut(Constants.Endpoints.UPDATE_CITY,
                 cityDto,
                 CityDto.class);
         LOG.debug("In RestCityService - Sending POST request to add new City");
-        return responseEntity.getBody();
+        return Optional.ofNullable(responseEntity.getBody());
     }
 
     @Override
