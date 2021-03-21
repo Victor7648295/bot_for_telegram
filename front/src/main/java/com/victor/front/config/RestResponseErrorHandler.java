@@ -1,5 +1,6 @@
-package com.victor.front.exception;
+package com.victor.front.config;
 
+import com.victor.front.exception.RestCommunicationException;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;

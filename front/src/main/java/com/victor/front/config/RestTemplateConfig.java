@@ -1,7 +1,5 @@
 package com.victor.front.config;
 
-import com.victor.front.exception.RestResponseErrorHandler;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
