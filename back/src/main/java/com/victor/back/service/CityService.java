@@ -16,4 +16,5 @@ public interface CityService {
     List<City> getAllCity();
 
     Optional<City> findById(Long id);
+
 }

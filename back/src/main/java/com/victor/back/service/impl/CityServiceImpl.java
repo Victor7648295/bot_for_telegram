@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @Service
 public class CityServiceImpl implements CityService {
+    
 
    private static final Logger LOG = LoggerFactory.getLogger(CityServiceImpl.class);
 
@@ -65,4 +66,6 @@ public class CityServiceImpl implements CityService {
     public Optional<City> findById(Long id) {
         return repository.findById(id);
     }
+
+
 }

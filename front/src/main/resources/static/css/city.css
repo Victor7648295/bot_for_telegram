@@ -3,6 +3,8 @@ table {
     font-size: 14px;
     border-collapse: collapse;
     text-align: center;
+
+
 }
 th, td:first-child {
     background: #AFCDE7;
@@ -20,4 +22,5 @@ td {
 th:first-child, td:first-child {
     text-align: left;
 }
+
 

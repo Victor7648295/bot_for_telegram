@@ -1,4 +1,4 @@
-package com.victor.back.api.v1;
+package com.victor.back.api.v1.controller;
 
 import com.victor.back.converter.impl.CityDtoToCityConverter;
 import com.victor.back.converter.impl.CityToCityDtoConverter;
