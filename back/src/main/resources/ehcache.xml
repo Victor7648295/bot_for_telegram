@@ -1,0 +1,12 @@
+<config>
+
+    <cache alias="cityCache">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.util.List</value-type>
+        <expiry>
+            <ttl unit="minutes">30</ttl>
+        </expiry>
+        <heap>100</heap>
+    </cache>
+
+</config>

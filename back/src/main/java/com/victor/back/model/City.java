@@ -12,10 +12,10 @@ public class City {
     @Column(name= "id_city")
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
     public Long getId() {

@@ -7,8 +7,10 @@ import com.victor.back.repository.CityRepository;
 import com.victor.back.service.CityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +29,8 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    @Transactional
+    @CacheEvict(value = "cityCache",key = "'all'")
     public void deleteCity(Long id) {
      City city = repository.findById(id).orElseThrow(
              () -> new ResourceNotFoundException("In City Service - Not found city with id :" + id));
@@ -36,6 +40,8 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    @Transactional
+    @CacheEvict(value = "cityCache",key = "'all'")
     public void addCity(City city) {
         Optional<City> oldCity = repository.findByName(city.getName());
         if(oldCity.isPresent()) {
@@ -47,6 +53,8 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    @Transactional
+    @CacheEvict(value = "cityCache",key = "'all'")
     public void updateCity(City city) {
         Optional<City> oldCity = findById(city.getId());
         if(oldCity.isPresent()) {
@@ -56,7 +64,7 @@ public class CityServiceImpl implements CityService {
             throw new ResourceNotFoundException("In City Service - Not Found city with id : "+ city.getId());
         }
     }
-
+    @Cacheable(value = "cityCache",key = "'all'")
     @Override
     public List<City> getAllCity() {
         return repository.findAll();
